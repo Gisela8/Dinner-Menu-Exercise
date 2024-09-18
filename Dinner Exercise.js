@@ -67,7 +67,7 @@ return comments[Math.floor(Math.random() * comments.length)];
 }
 //3.funcion to display the menu options
 function getMenuItem(menu, type) {
-    return bottogaMenu[menu][type]
+    return bottegaMenu[menu][type]
         .map(item => `${item.name} - ${item.price}€`)
         .join;
 }
@@ -113,39 +113,37 @@ if (hours>=7 && hours <=12) {
 } else{
   return null;
 }
-}
 
 //8. Main function to run the menu selection
-function mostrarMenu() {
-  const menuPeriodoActual = menu[periodoActual].menuPrincipal;
-  let menuTexto = `Menú de ${menu[periodoActual].titulo}:\n\n`;
-
-for (const plato in menuPeriodoActual) {
-  const nombrePlato = `${plato.charAt(0).toUpperCase()}${plato.slice(1)}`;
-  const precioPlato = `€${menuPeriodoActual[plato].toFixed(2)}`;
-  menuTexto += `${nombrePlato}: ${precioPlato}\n`;
+function runMenu(){
+  let TimeMeal=null;
+  while(!TimeMeal)
 }
 
-  alert(menuTexto);
+const time= promt("Bienvenido/n Nuestro horario es de 7.00 a 24.00/n introduzca una hora (HH.MMM)");
+if (time===null){
+  alert("Vuelva a intentarlo");
+  return;
 }
+alert(`Bienvenido ${menu.charAt(0).toUpperCase() + menu.slice(1)} Menu!`);
 
-function mostrarMenu(menu) {
-  let mensajeAlerta = `Menú ${menu.titulo}\n\n`;
-  mensajeAlerta += "Platos principales:\n";
   
-  for (const plato of Object.values(menu.principal)) {
-    mensajeAlerta += `- ${plato.descripcion} €${plato.precio.toFixed(2)}\n`;
-  }
-  mensajeAlerta += "\nAcompañamientos:\n";
-  for (const acomp of Object.values(menu.acompañamiento)) {
-    mensajeAlerta += `- ${acomp.comida} €${acomp.precio.toFixed(2)}\n`;
-  }
-  mensajeAlerta += "\nBebidas:\n";
-  for (const bebida of Object.values(menu.bebida)) {
-    mensajeAlerta += `- ${bebida.comida} €${bebida.precio.toFixed(2)}\n`;
-  }
-  alert(mensajeAlerta);
-}//9. run the menu selection process
+  const mainCourses = getMenu(menu, 'mainCourses');
+  const selectedmainCourses = promptvalidoption(menu, 'mainCourses', `Por favor, 
+    seleccione un plato princial:\n${mainOptions}`);
+  const sideCourses1= getOptions(menu, 'sideCourses1');
+  const selectedsideCourses1= promptvalidoption(menu, 'sideCourses1', `Por favor, 
+    seleccione un plato de acompañamiento:\n${sideCourses1}`);
+  const sideCourses2 = getOptions(menu, 'sideCourses2');
+  const selectedsideCourses2= promptvalidoption(menu, 'sideCourses2', `Por favor, 
+    seleccione un postre:\n${sideCourses2}`);
 
+  const iteminvoice= createinvoice (selectedmainCourses, selectedsideCourses1, selectedsideCourses2);
+
+  alert(iteminvoice);
+}
+
+//9. run the menu selection process
+runMenu();
 
 
